@@ -6,6 +6,7 @@ Mängu eesmärk on võimalikult kiiresti ekraanile tekkivaid sõnu ära trükkid
 Autorid:
 Tim
 Jaroslava Koger
+Rasmus
 
 
 
