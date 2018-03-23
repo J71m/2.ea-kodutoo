@@ -21,6 +21,44 @@
     <script src="app.js"></script>
   </head>
   <body>
-    <canvas></canvas>
+        
+    <!-- top navbar? -->
+    <ul id="">
+        <li id="nav-item"><a href="#menuview" id="nav-link menuview">Menu</a></li>
+
+    </ul>
+
+    <!-- main menu -->
+    <section id="menuview">
+        <h2>Menu</h2>
+        <ul id="menu-list">
+            <li id="menu-item"><a href="#gameview" id="menu-link gameview">Start game</a></li>
+            <li id="menu-item"><a href="#optionsview" id="menu-link optionsview">Options</a></li>
+            <li id="menu-item"><a href="#statsview" id="menu-link statsview">Stats</a></li>
+        </ul>
+      </section>
+
+    <!-- game -->
+    <section id="gameview">
+      <canvas></canvas>
+    </section>
+
+    <!-- Options -->
+    <section id="optionsview">
+      <h2>Options</h2>
+      <p>Nightmode?</p>
+      <p>Font and size?</p>
+      <p>...</p>
+    </section>
+
+    <!-- Stats -->
+    <section id="statsview">
+      <h2>Statistics</h2>
+      <p>top10 scores from localstorage</p>
+    </section>
+
+
+    
+
   </body>
 </html>
