@@ -1,0 +1,25 @@
+* {
+    margin: 0;
+    padding: 0;
+  }
+
+  html, body, canvas {
+    width: 100%;
+    height: 100%;
+  }
+  
+  canvas {
+    position: absolute;
+  }
+  main > * {
+    display: none;
+  }
+  main > *:last-child {
+    display: block;
+  }
+  main > *:target {
+    display: block;
+  }
+  main > *:target ~ * {
+    display: none;
+}

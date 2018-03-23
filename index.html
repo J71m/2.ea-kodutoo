@@ -2,49 +2,26 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8">
-    <title>typer</title>
-    <style> 
-      * {
-        margin: 0;
-        padding: 0;
-      }
-
-      html, body, canvas {
-        width: 100%;
-        height: 100%;
-      }
-      
-      canvas {
-        position: absolute;
-      }
-    </style>
+    <title>Typer</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
     <script src="app.js"></script>
+    <!-- <script src="test.js"></script> -->
   </head>
   <body>
         
     <!-- top navbar? -->
-    <ul id="">
-        <li id="nav-item"><a href="#menuview" id="nav-link menuview">Menu</a></li>
 
-    </ul>
 <main role="main">
-    <!-- main menu -->
-    <section id="menuview">
-        <h2>Menu</h2>
-        <ul id="menu-list">
-            <li id="menu-item"><a href="#gameview" id="menu-link gameview">Start game</a></li>
-            <li id="menu-item"><a href="#optionsview" id="menu-link optionsview">Options</a></li>
-            <li id="menu-item"><a href="#statsview" id="menu-link statsview">Stats</a></li>
-        </ul>
-      </section>
 
     <!-- game -->
-    <section id="gameview">
+    <section id="game">
+      <a href="#menu" id="menu">Back</a>
       <canvas></canvas>
     </section>
 
     <!-- Options -->
-    <section id="optionsview">
+    <section id="options">
+      <a href="#menuview" id="menu">Back</a>
       <h2>Options</h2>
       <p>Nightmode?</p>
       <p>Font and size?</p>
@@ -52,9 +29,29 @@
     </section>
 
     <!-- Stats -->
-    <section id="statsview">
+    <section id="stats">
+      <a href="#menu" id="menu">Back</a>
       <h2>Statistics</h2>
       <p>top10 scores from localstorage</p>
+    </section>
+
+    <!-- Player select, default last player -->
+    <section id="player">
+      <a href="#menu" id="menu">Back</a>
+      <h3>Sisesta mängija nimi</h3>
+      <input type="text" name="playerName">
+      <input type="button" name="playerSubmit" value="Valmis">
+    </section>
+
+    <!-- main menu -->
+    <section id="menu">
+      <h2>Menu</h2>
+      <ul id="menu-list">
+          <li><a href="#game" id="game">Start game</a></li>
+          <li><a href="#options" id="options">Options</a></li>
+          <li><a href="#stats" id="stats">Stats</a></li>
+          <li><a href="#player" id="player">Player select</a></li>
+      </ul>
     </section>
 
   </main>
