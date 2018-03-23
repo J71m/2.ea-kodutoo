@@ -15,6 +15,8 @@ const TYPER = function () {
   this.wordMinLength = 5
   this.guessedWords = 0
 
+  this.counter = 1000
+
   this.init()
 }
 
@@ -57,8 +59,15 @@ TYPER.prototype = {
     this.word.Draw()
 
     window.addEventListener('keypress', this.keyPressed.bind(this))
+
+    
+    window.setInterval(this.loop.bind(this), 1000)
   },
 
+  loop:function(){
+    this.counter -= 1
+    this.word.Draw()
+  },
   generateWord: function () {
     const generatedWordLength = this.wordMinLength + parseInt(this.guessedWords / 5)
     const randomIndex = (Math.random() * (this.words[generatedWordLength].length - 1)).toFixed()
@@ -99,6 +108,10 @@ Word.prototype = {
     this.ctx.textAlign = 'center'
     this.ctx.font = '140px Courier'
     this.ctx.fillText(this.left, this.canvas.width / 2, this.canvas.height / 2)
+
+    this.ctx.textAlign = 'left'
+    this.ctx.font = '40px Arial'
+    this.ctx.fillText(typer.counter, 100, 100)
   },
 
   removeFirstLetter: function () {
