@@ -109,9 +109,11 @@ Word.prototype = {
     this.ctx.font = '140px Courier'
     this.ctx.fillText(this.left, this.canvas.width / 2, this.canvas.height / 2)
 
+    /*drawing the counter
     this.ctx.textAlign = 'left'
     this.ctx.font = '40px Arial'
     this.ctx.fillText(typer.counter, 100, 500)
+    */
   },
 
   removeFirstLetter: function () {
