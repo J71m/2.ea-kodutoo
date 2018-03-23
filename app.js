@@ -111,7 +111,7 @@ Word.prototype = {
 
     this.ctx.textAlign = 'left'
     this.ctx.font = '40px Arial'
-    this.ctx.fillText(typer.counter, 100, 100)
+    this.ctx.fillText(typer.counter, 100, 500)
   },
 
   removeFirstLetter: function () {
