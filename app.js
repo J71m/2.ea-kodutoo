@@ -125,7 +125,7 @@ TYPER.prototype = {
       })
       console.log('Wrong letter pressed')
     }
-    this.score = this.guessedLetters + this.bonusPoints + this.guessedWords
+    this.score = this.guessedLetters + this.bonusPoints + this.guessedWords * 10
     document.getElementById('score').innerHTML = this.score
   }
 }
