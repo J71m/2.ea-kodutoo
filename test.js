@@ -1,16 +1,9 @@
-/* 
- 
-
+/*
   NÄITED:
   localstorage,
   active menu,
   php faili saatmine
-
-
-
-
-
- */
+*/
 const MainApp = function () {
   if (MainApp.instance) {
     return MainApp.instance

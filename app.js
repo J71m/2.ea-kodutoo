@@ -27,8 +27,8 @@ TYPER.prototype = {
     this.canvas = document.getElementsByTagName('canvas')[0]
     this.ctx = this.canvas.getContext('2d')
 
-    this.canvas.style.width = this.WIDTH + 'px'
-    this.canvas.style.height = this.HEIGHT + 'px'
+    this.canvas.style.width = this.WIDTH - 15 + 'px'
+    this.canvas.style.height = this.HEIGHT - 73 + 'px'
 
     this.canvas.width = this.WIDTH * 2
     this.canvas.height = this.HEIGHT * 2
@@ -60,11 +60,10 @@ TYPER.prototype = {
 
     window.addEventListener('keypress', this.keyPressed.bind(this))
 
-    
     window.setInterval(this.loop.bind(this), 1000)
   },
 
-  loop:function(){
+  loop: function () {
     this.counter -= 1
     this.word.Draw()
   },
@@ -109,7 +108,7 @@ Word.prototype = {
     this.ctx.font = '140px Courier'
     this.ctx.fillText(this.left, this.canvas.width / 2, this.canvas.height / 2)
 
-    /*drawing the counter
+    /* drawing the counter
     this.ctx.textAlign = 'left'
     this.ctx.font = '40px Arial'
     this.ctx.fillText(typer.counter, 100, 500)
