@@ -116,12 +116,14 @@ TYPER.prototype = {
       this.word.Draw()
     } else {
       this.consecLetters = 0
+      let currentBg = document.body.style.backgroundColor
+      console.log(currentBg)
       let animElement = document.getElementsByClassName('wordCanvas')
       TweenMax.staggerFrom(animElement, 0.3, {
         backgroundColor: 'red'
       })
       TweenMax.staggerTo(animElement, 0.3, {
-        backgroundColor: 'white'
+        backgroundColor: currentBg
       })
       console.log('Wrong letter pressed')
     }
@@ -164,7 +166,7 @@ function structureArrayByWordLength (words) {
 
   for (let i = 0; i < words.length; i++) {
     const wordLength = words[i].length
-    if (tempArray[wordLength] === undefined)tempArray[wordLength] = []
+    if (tempArray[wordLength] === undefined) tempArray[wordLength] = []
 
     tempArray[wordLength].push(words[i])
   }
@@ -196,6 +198,16 @@ function timer () {
   document.getElementById('timer').innerHTML = seconds
 }
 */
+
+function nightMode() {
+  if (document.querySelector('#nightMode').checked) {
+    document.body.style.background = 'SlateGray'
+    console.log('night on')
+  } else {
+    document.body.style.background = 'white'
+    console.log('night off')
+  }
+}
 
 window.onload = function () {
   const typer = new TYPER()
