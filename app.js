@@ -98,7 +98,11 @@ TYPER.prototype = {
         TweenMax.staggerFrom(animElement, 0.2, {
           opacity: 0,
           scale: 0
-        }, 0.2)
+        })
+        TweenMax.staggerTo(animElement, 0.2, {
+          opacity: 1,
+          scale: 1
+        })
       }
       this.word.Draw()
     } else {
