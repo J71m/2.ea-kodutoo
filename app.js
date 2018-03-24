@@ -15,6 +15,9 @@ const TYPER = function () {
   this.word = null
   this.wordMinLength = 5
   this.guessedWords = 0
+  this.guessedLetters = 0
+  this.bonusPoints = 0
+  this.consecLetters = 0
 
   this.counter = 1000
 
@@ -82,6 +85,12 @@ TYPER.prototype = {
   keyPressed: function (event) {
     const letter = String.fromCharCode(event.which)
     if (letter === this.word.left.charAt(0)) {
+      this.guessedLetters += 1
+      this.consecLetters += 1
+      if (this.consecLetters === 10) {
+        this.consecLetters = 0
+        this.bonusPoints += 10
+      }
       let animElement = document.getElementsByClassName('wordCanvas')
       TweenMax.staggerFrom(animElement, 0.3, {
         scale: 0.8
@@ -106,6 +115,7 @@ TYPER.prototype = {
       }
       this.word.Draw()
     } else {
+      this.consecLetters = 0
       let animElement = document.getElementsByClassName('wordCanvas')
       TweenMax.staggerFrom(animElement, 0.3, {
         backgroundColor: 'red'
@@ -115,6 +125,8 @@ TYPER.prototype = {
       })
       console.log('Wrong letter pressed')
     }
+    this.score = this.guessedLetters + this.bonusPoints + this.guessedWords
+    document.getElementById('score').innerHTML = this.score
   }
 }
 
