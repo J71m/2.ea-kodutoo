@@ -10,6 +10,7 @@ const TYPER = function () {
   this.HEIGHT = window.innerHeight
   this.canvas = null
   this.ctx = null
+  document.body.style.background = 'white'
 
   this.words = []
   this.word = null
