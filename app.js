@@ -1,4 +1,5 @@
 /* TYPER */
+/* global TweenMax */
 const TYPER = function () {
   if (TYPER.instance_) {
     return TYPER.instance_
@@ -77,17 +78,21 @@ TYPER.prototype = {
 
   keyPressed: function (event) {
     const letter = String.fromCharCode(event.which)
-
     if (letter === this.word.left.charAt(0)) {
       this.word.removeFirstLetter()
 
       if (this.word.left.length === 0) {
         this.guessedWords += 1
-
         this.generateWord()
+        let animElement = document.getElementsByClassName('wordCanvas')
+        TweenMax.staggerFrom(animElement, 0.2, {
+          opacity: 0,
+          scale: 0
+        }, 0.2)
       }
-
       this.word.Draw()
+    } else {
+      console.log('Wrong letter pressed')
     }
   }
 }
