@@ -13,13 +13,14 @@
 	 crossorigin="anonymous">
 	</script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.20.3/TweenMax.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.20.4/plugins/ColorPropsPlugin.min.js"></script>
 	<link rel="stylesheet" type="text/css" href="style.css">
 	<script src="app.js"></script>
 	<!-- <script src="test.js"></script> -->
 </head>
 
 <body>
-	<nav class="navbar navbar-expand-sm bg-dark navbar-dark static-top">
+	<nav class="navbar navbar-expand-sm bg-dark navbar-dark fixed-top">
 		<div class="container-fluid">
 			<a class="navbar-brand" href="#welcome">Klahvimine</a>
 			<ul class="navbar-nav mr-auto">
@@ -33,7 +34,10 @@
 					<a class="nav-link" href="#stats">Stats</a>
 				</li>
 				<li class="nav-item">
-					<a class="nav-link" href="#player">Player Select</a>
+						<a class="nav-link" href="#player">Player Select</a>
+				</li>
+				<li class="nav-item">
+						<a class="nav-link" href="#player"><span id="timer"></span></a>
 				</li>
 			</ul>
 		</div>
@@ -44,7 +48,7 @@
 		<main role="main">
 
 			<!-- welcome -->
-			<section id="welcome">
+			<section id="welcome" style="padding-top:60px;">
 				<h2>Klahvimine</h2>
 				<p>Mängu kirjeldus</p>
 			</section>
@@ -55,7 +59,7 @@
 			</section>
 
 			<!-- Options -->
-			<section id="options">
+			<section id="options" style="padding-top:60px;">
 				<h2>Options</h2>
 				<p>Nightmode?</p>
 				<p>Font and size?</p>
@@ -63,13 +67,13 @@
 			</section>
 
 			<!-- Stats -->
-			<section id="stats">
+			<section id="stats" style="padding-top:60px;">
 				<h2>Statistics</h2>
 				<p>top10 scores from localstorage</p>
 			</section>
 
 			<!-- Player select, default last player -->
-			<section id="player">
+			<section id="player" style="padding-top:60px;">
 				<div class="row">
 					<div class="col-md-3">
 						<div class="form-group">

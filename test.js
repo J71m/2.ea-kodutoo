@@ -137,5 +137,3 @@ window.onload = function () {
   const app = new MainApp()
   window.app = app
 }
-
-

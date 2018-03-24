@@ -18,6 +18,9 @@ const TYPER = function () {
 
   this.counter = 1000
 
+  this.canvas = document.getElementsByTagName('canvas')[0]
+  this.ctx = this.canvas.getContext('2d')
+
   this.init()
 }
 
@@ -25,11 +28,11 @@ window.TYPER = TYPER
 
 TYPER.prototype = {
   init: function () {
-    this.canvas = document.getElementsByTagName('canvas')[0]
-    this.ctx = this.canvas.getContext('2d')
+    // this.canvas = document.getElementsByTagName('canvas')[0]
+    // this.ctx = this.canvas.getContext('2d')
 
-    this.canvas.style.width = this.WIDTH - 15 + 'px'
-    this.canvas.style.height = this.HEIGHT - 73 + 'px'
+    this.canvas.style.width = this.WIDTH + 'px'
+    this.canvas.style.height = this.HEIGHT + 'px'
 
     this.canvas.width = this.WIDTH * 2
     this.canvas.height = this.HEIGHT * 2
@@ -79,6 +82,13 @@ TYPER.prototype = {
   keyPressed: function (event) {
     const letter = String.fromCharCode(event.which)
     if (letter === this.word.left.charAt(0)) {
+      let animElement = document.getElementsByClassName('wordCanvas')
+      TweenMax.staggerFrom(animElement, 0.3, {
+        scale: 0.8
+      })
+      TweenMax.staggerTo(animElement, 0.3, {
+        scale: 1.0
+      })
       this.word.removeFirstLetter()
 
       if (this.word.left.length === 0) {
@@ -92,6 +102,13 @@ TYPER.prototype = {
       }
       this.word.Draw()
     } else {
+      let animElement = document.getElementsByClassName('wordCanvas')
+      TweenMax.staggerFrom(animElement, 0.3, {
+        backgroundColor: 'red'
+      })
+      TweenMax.staggerTo(animElement, 0.3, {
+        backgroundColor: 'white'
+      })
       console.log('Wrong letter pressed')
     }
   }
@@ -138,6 +155,31 @@ function structureArrayByWordLength (words) {
 
   return tempArray
 }
+
+// Skoori salvestamise ja timeri funktsioonid, tuleb mingi "start game"
+// trigger teha millega need tööle hakkaksid(nt. siis kui mängija nime sisestanud või mängu peale vajutab menüüs)
+
+/*
+function storeScore (name, score) {
+  if (window.localStorage.length === 0) {
+    let tempArray = []
+    let player = [name, score]
+    tempArray.push(player)
+    localStorage.setItem('tempArray', JSON.stringify(tempArray))
+  } else {
+    let storage = JSON.parse(localStorage.getItem('tempArray'))
+    let newPlayer = [name, score]
+    storage.push(newPlayer)
+    localStorage.setItem('tempArray', JSON.stringify(storage))
+  }
+}
+
+let seconds = 0
+function timer () {
+  ++seconds
+  document.getElementById('timer').innerHTML = seconds
+}
+*/
 
 window.onload = function () {
   const typer = new TYPER()
