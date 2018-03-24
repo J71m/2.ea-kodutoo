@@ -19,6 +19,7 @@ const TYPER = function () {
   this.guessedLetters = 0
   this.bonusPoints = 0
   this.consecLetters = 0
+  this.penalty = 0
 
   this.counter = 1000
 
@@ -116,6 +117,7 @@ TYPER.prototype = {
       }
       this.word.Draw()
     } else {
+      this.penalty += 2
       this.consecLetters = 0
       let currentBg = document.body.style.backgroundColor
       console.log(currentBg)
@@ -128,7 +130,7 @@ TYPER.prototype = {
       })
       console.log('Wrong letter pressed')
     }
-    this.score = this.guessedLetters + this.bonusPoints + this.guessedWords * 10
+    this.score = this.guessedLetters + this.bonusPoints + this.guessedWords * 10 - this.penalty
     document.getElementById('score').innerHTML = this.score
   }
 }
