@@ -304,7 +304,11 @@ window.onload = function () {
 
 function showScores() {
   var table = document.getElementById('scoreTable')
-
+  // Remove all current children of table
+  while (table.firstChild) {
+    table.removeChild(table.firstChild)
+  }
+  // Add newest scores to table
   for (var i = 0; i < localStorage.length; i++) {
 
     var myObj = JSON.parse(localStorage.getItem(localStorage.key(i)));
