@@ -23,7 +23,7 @@ const TYPER = function () {
   this.consecLetters = 0
   this.penalty = 0
   
- 
+
   this.size ='140px'
   this.font = 'Courier'
   this.canvas = document.getElementsByTagName('canvas')[0]

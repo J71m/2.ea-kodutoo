@@ -15,7 +15,6 @@ const MainApp = function () {
 
   this.init()
 }
-
 MainApp.routes = {
   'home-view': {
     'render': function () {
