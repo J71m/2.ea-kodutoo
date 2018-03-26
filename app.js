@@ -91,6 +91,7 @@ TYPER.prototype = {
   },
 
   keyPressed: function (event) {
+    //keypress events and score calculations
     const letter = String.fromCharCode(event.which)
     if (letter === this.word.left.charAt(0)) {
       this.guessedLetters += 1
@@ -223,6 +224,7 @@ function nightMode() {
 
 
 function FontChange() {
+  //change font and size of words
   document.getElementById("customButton").addEventListener("click", function () {
     typer.font = document.getElementById("FontChange").value
     typer.size = document.getElementById("SizeChange").value
@@ -233,6 +235,7 @@ function FontChange() {
 }
 
 function timerPlayer() {
+  //setup for starting game
   document.getElementById("playerSubmit").addEventListener("click", function () {
     document.getElementById('score').innerHTML = "SCORE: "
     playerName = document.getElementById("playerName").value
@@ -243,6 +246,7 @@ function timerPlayer() {
 }
 
 function gameStart() {
+  //checks user location on the webpage and pauses/resumes counter accordingly
   window.addEventListener('hashchange', function () {
     if (window.location.hash === '#game') {
       const typer = new TYPER()
