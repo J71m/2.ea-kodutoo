@@ -8,6 +8,11 @@ Tim</br>
 Jaroslava Koger</br>
 Rasmus</br>
 
+Funktsionaalsus: Kasutaja sisestab nime ja vajutab nupul "Ready", sellega läheb mäng käima. Menüüs on valikud mängu välimuse muutmiseks ja statistika (top 10) nägemiseks. Minnes mängu lehelt muu valiku peale, pannakse taimer pausile ja seda automaatselt jätkatakse, kui naastakse mängu juurde.
+Mängimiseks on kokku 60 sekundit, selle täitumisel kuvatakse skoor ja salvestatakse koos mängija nimega lokaalselt.
+
+Skoor: Skoori arvestatakse pärast iga tähe sisestamist - vale tähe korral -2 punkti ja nullitakse boonus, õige tähe puhul suureneb boonus ühe võrra ja skoorile lisatakse summa. Summa valem = arvatud tähed + boonus (järjest mitu õiget tähte) + arvatud sõnade arv*10
+
 Skeem:
 ![alt text](https://i.imgur.com/mkQAnZF.jpg)
 
