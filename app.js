@@ -1,21 +1,31 @@
 /* TYPER */
+/* global TweenMax */
 const TYPER = function () {
   if (TYPER.instance_) {
     return TYPER.instance_
-  }
+  } 
   TYPER.instance_ = this
 
   this.WIDTH = window.innerWidth
   this.HEIGHT = window.innerHeight
   this.canvas = null
   this.ctx = null
+  document.body.style.background = 'white'
 
   this.words = []
   this.word = null
   this.wordMinLength = 5
   this.guessedWords = 0
-
+  this.guessedLetters = 0
+  this.bonusPoints = 0
+  this.consecLetters = 0
+  this.penalty = 0
+  
   this.counter = 1000
+  this.size ='140px'
+  this.font = 'Courier'
+  this.canvas = document.getElementsByTagName('canvas')[0]
+  this.ctx = this.canvas.getContext('2d')
 
   this.init()
 }
@@ -24,8 +34,8 @@ window.TYPER = TYPER
 
 TYPER.prototype = {
   init: function () {
-    this.canvas = document.getElementsByTagName('canvas')[0]
-    this.ctx = this.canvas.getContext('2d')
+    // this.canvas = document.getElementsByTagName('canvas')[0]
+    // this.ctx = this.canvas.getContext('2d')
 
     this.canvas.style.width = this.WIDTH + 'px'
     this.canvas.style.height = this.HEIGHT + 'px'
@@ -60,11 +70,10 @@ TYPER.prototype = {
 
     window.addEventListener('keypress', this.keyPressed.bind(this))
 
-    
     window.setInterval(this.loop.bind(this), 1000)
   },
 
-  loop:function(){
+  loop: function () {
     this.counter -= 1
     this.word.Draw()
   },
@@ -78,18 +87,52 @@ TYPER.prototype = {
 
   keyPressed: function (event) {
     const letter = String.fromCharCode(event.which)
-
     if (letter === this.word.left.charAt(0)) {
+      this.guessedLetters += 1
+      this.consecLetters += 1
+      if (this.consecLetters === 10) {
+        this.consecLetters = 0
+        this.bonusPoints += 10
+      }
+      let animElement = document.getElementsByClassName('wordCanvas')
+      TweenMax.staggerFrom(animElement, 0.3, {
+        scale: 0.8
+      })
+      TweenMax.staggerTo(animElement, 0.3, {
+        scale: 1.0
+      })
       this.word.removeFirstLetter()
 
       if (this.word.left.length === 0) {
         this.guessedWords += 1
-
         this.generateWord()
+        let animElement = document.getElementsByClassName('wordCanvas')
+        TweenMax.staggerFrom(animElement, 0.2, {
+          opacity: 0,
+          scale: 0
+        })
+        TweenMax.staggerTo(animElement, 0.2, {
+          opacity: 1,
+          scale: 1
+        })
       }
-
       this.word.Draw()
+    } else {
+      this.penalty += 2
+      this.consecLetters = 0
+      let currentBg = document.body.style.backgroundColor
+      console.log(currentBg)
+      let animElement = document.getElementsByClassName('wordCanvas')
+      TweenMax.staggerFrom(animElement, 0.3, {
+        backgroundColor: 'red'
+      })
+      TweenMax.staggerTo(animElement, 0.3, {
+        backgroundColor: currentBg
+      })
+      console.log('Wrong letter pressed')
     }
+    this.score = this.guessedLetters + this.bonusPoints + this.guessedWords * 10 - this.penalty
+    document.getElementById('score').innerHTML = this.score
   }
 }
 
@@ -106,10 +149,11 @@ Word.prototype = {
     this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height)
 
     this.ctx.textAlign = 'center'
-    this.ctx.font = '140px Courier'
+    this.ctx.font = typer.size +" "+ typer.font
+    
     this.ctx.fillText(this.left, this.canvas.width / 2, this.canvas.height / 2)
 
-    /*drawing the counter
+    /* drawing the counter
     this.ctx.textAlign = 'left'
     this.ctx.font = '40px Arial'
     this.ctx.fillText(typer.counter, 100, 500)
@@ -127,15 +171,63 @@ function structureArrayByWordLength (words) {
 
   for (let i = 0; i < words.length; i++) {
     const wordLength = words[i].length
-    if (tempArray[wordLength] === undefined)tempArray[wordLength] = []
+    if (tempArray[wordLength] === undefined) tempArray[wordLength] = []
 
     tempArray[wordLength].push(words[i])
   }
 
   return tempArray
 }
- 
+
+// Skoori salvestamise ja timeri funktsioonid, tuleb mingi "start game"
+// trigger teha millega need tööle hakkaksid(nt. siis kui mängija nime sisestanud või mängu peale vajutab menüüs)
+
+/*
+function storeScore (name, score) {
+  if (window.localStorage.length === 0) {
+    let tempArray = []
+    let player = [name, score]
+    tempArray.push(player)
+    localStorage.setItem('tempArray', JSON.stringify(tempArray))
+  } else {
+    let storage = JSON.parse(localStorage.getItem('tempArray'))
+    let newPlayer = [name, score]
+    storage.push(newPlayer)
+    localStorage.setItem('tempArray', JSON.stringify(storage))
+  }
+}
+
+let seconds = 0
+function timer () {
+  ++seconds
+  document.getElementById('timer').innerHTML = seconds
+}
+*/
+
+function nightMode() {
+  if (document.querySelector('#nightMode').checked) {
+    document.body.style.background = 'SlateGray'
+    console.log('night on')
+  } else {
+    document.body.style.background = 'white'
+    console.log('night off')
+  }
+}
+
+function FontChange() {
+  document.getElementById("customButton").addEventListener("click", function(){
+    typer.font=document.getElementById("FontChange").value
+    typer.size=document.getElementById("SizeChange").value
+  })
+
+
+  console.log()
+}
+
+
+
 window.onload = function () {
   const typer = new TYPER()
   window.typer = typer
+  FontChange()
 }
