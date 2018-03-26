@@ -14,7 +14,7 @@ const MainApp = function () {
   this.currentRoute = null
 
   this.init()
-}
+} 
 
 MainApp.routes = {
   'home-view': {
