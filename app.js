@@ -320,7 +320,8 @@ function showScores() {
   }
   // Get 10 maximum values from scores array
   let sortedArray = tempArray.sort(function (a, b) { return b.score - a.score })
-  for (var i = 0; i < 10; i++) {
+  let arrayLen = sortedArray.length
+  for (var i = 0; i < 10 && i < arrayLen; i++) {
     let row = table.insertRow(0)
     let cell1 = row.insertCell(0)
     let cell2 = row.insertCell(1)
