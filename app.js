@@ -1,5 +1,7 @@
 /* TYPER */
 /* global TweenMax */
+let playerName = "a"
+let counter = 60
 const TYPER = function () {
   if (TYPER.instance_) {
     return TYPER.instance_
@@ -21,7 +23,7 @@ const TYPER = function () {
   this.consecLetters = 0
   this.penalty = 0
   
-  this.counter = 1000
+ 
   this.size ='140px'
   this.font = 'Courier'
   this.canvas = document.getElementsByTagName('canvas')[0]
@@ -31,6 +33,9 @@ const TYPER = function () {
 }
 
 window.TYPER = TYPER
+
+
+
 
 TYPER.prototype = {
   init: function () {
@@ -43,6 +48,7 @@ TYPER.prototype = {
     this.canvas.width = this.WIDTH * 2
     this.canvas.height = this.HEIGHT * 2
 
+    
     this.loadWords()
   },
 
@@ -74,7 +80,6 @@ TYPER.prototype = {
   },
 
   loop: function () {
-    this.counter -= 1
     this.word.Draw()
   },
   generateWord: function () {
@@ -230,4 +235,15 @@ window.onload = function () {
   const typer = new TYPER()
   window.typer = typer
   FontChange()
+  document.getElementById("playerSubmit").addEventListener("click", function () {
+    playerName = document.getElementById("playerName").value
+    document.getElementById("replaceName").innerHTML = playerName
+    window.location.replace('http://greeny.cs.tlu.ee/~jaantim/js/2.ea-kodutoo/#game');
+    setInterval(function() {
+    if(counter != 0 && playerName != ""){
+      counter -= 1
+    }
+    document.getElementById('timer').innerHTML = "Time remaining: " + counter
+    },1000)
+  })
 }
