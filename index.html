@@ -24,26 +24,27 @@
 		<div class="container-fluid">
 			<a class="navbar-brand" href="#welcome">Klahvimine</a>
 			<ul class="navbar-nav mr-auto">
-				<li class="nav-item active">
+				<!--<li class="nav-item active">
 					<a class="nav-link" href="#game">Start game</a>
-				</li>
+        </li> -->
+        <li class="nav-item">
+          <a class="nav-link" href="#player"><span id="replaceName">Player Select</span></a>
+        </li>
 				<li class="nav-item">
 					<a class="nav-link" href="#options">Options</a>
 				</li>
 				<li class="nav-item">
 					<a class="nav-link" href="#stats">Stats</a>
 				</li>
+
 				<li class="nav-item">
-						<a class="nav-link" href="#player">Player Select</a>
-				</li>
-				<li class="nav-item">
-						<a class="nav-link" href="#player"><span id="timer"></span></a>
+          <a class="nav-link" href="#player"><span id="timer"></span></a>
 				</li>
 				<li class="divider-vertical"></li>
 			</ul>
-			<ul class="navbar-nav navbar-right">
+			<ul class="navbar-nav ">
 					<li class="nav-item">
-							<span id="score" class="nav-link">SCORE</span>
+              <span id="score" class="nav-link">SCORE</span>
 					</li>
 			</ul>
 		</div>
@@ -89,9 +90,9 @@
 				<div class="row">
 					<div class="col-md-3">
 						<div class="form-group">
-							<label for="playerName">Sisesta mängija nimi:</label>
-							<input type="text" name="playerName" id="playerName" class="form-control">
-							<input type="button" name="playerSubmit" value="Valmis" class="btn btn-default">
+							<label for="playerName">Enter player name:</label>
+              <input type="text" name="playerName" id="playerName" class="form-control">
+							<input type="button" name="playerSubmit" id="playerSubmit" value="Ready" class="btn btn-default"> 
 						</div>
 					</div>
 				</div>
