@@ -5,9 +5,9 @@ let counter = 60
 const TYPER = function () {
   if (TYPER.instance_) {
     return TYPER.instance_
-  } 
+  }
   TYPER.instance_ = this
- 
+
   this.WIDTH = window.innerWidth
   this.HEIGHT = window.innerHeight
   this.canvas = null
@@ -22,9 +22,9 @@ const TYPER = function () {
   this.bonusPoints = 0
   this.consecLetters = 0
   this.penalty = 0
-  
 
-  this.size ='140px'
+
+  this.size = '140px'
   this.font = 'Courier'
   this.canvas = document.getElementsByTagName('canvas')[0]
   this.ctx = this.canvas.getContext('2d')
@@ -48,7 +48,7 @@ TYPER.prototype = {
     this.canvas.width = this.WIDTH * 2
     this.canvas.height = this.HEIGHT * 2
 
-    
+
     this.loadWords()
   },
 
@@ -91,54 +91,54 @@ TYPER.prototype = {
   },
 
   keyPressed: function (event) {
-      const letter = String.fromCharCode(event.which)
-      if (letter === this.word.left.charAt(0)) {
-        this.guessedLetters += 1
-        this.consecLetters += 1
-        if (this.consecLetters === 10) {
-          this.consecLetters = 0
-          this.bonusPoints += 10
-        }
-        let animElement = document.getElementsByClassName('wordCanvas')
-        TweenMax.staggerFrom(animElement, 0.3, {
-          scale: 0.8
-        })
-        TweenMax.staggerTo(animElement, 0.3, {
-          scale: 1.0
-        })
-        this.word.removeFirstLetter()
-
-        if (this.word.left.length === 0) {
-          this.guessedWords += 1
-          this.generateWord()
-          let animElement = document.getElementsByClassName('wordCanvas')
-          TweenMax.staggerFrom(animElement, 0.2, {
-            opacity: 0,
-            scale: 0
-          })
-          TweenMax.staggerTo(animElement, 0.2, {
-            opacity: 1,
-            scale: 1
-          })
-        }
-        this.word.Draw()
-      } else {
-        this.penalty += 2
+    const letter = String.fromCharCode(event.which)
+    if (letter === this.word.left.charAt(0)) {
+      this.guessedLetters += 1
+      this.consecLetters += 1
+      if (this.consecLetters === 10) {
         this.consecLetters = 0
-        let currentBg = document.body.style.backgroundColor
-        console.log(currentBg)
-        let animElement = document.getElementsByClassName('wordCanvas')
-        TweenMax.staggerFrom(animElement, 0.3, {
-          backgroundColor: 'red'
-        })
-        TweenMax.staggerTo(animElement, 0.3, {
-          backgroundColor: currentBg
-        })
-        console.log('Wrong letter pressed')
+        this.bonusPoints += 10
       }
-      this.score = this.guessedLetters + this.bonusPoints + this.guessedWords * 10 - this.penalty
-      document.getElementById('score').innerHTML ="SCORE: " + this.score
+      let animElement = document.getElementsByClassName('wordCanvas')
+      TweenMax.staggerFrom(animElement, 0.3, {
+        scale: 0.8
+      })
+      TweenMax.staggerTo(animElement, 0.3, {
+        scale: 1.0
+      })
+      this.word.removeFirstLetter()
+
+      if (this.word.left.length === 0) {
+        this.guessedWords += 1
+        this.generateWord()
+        let animElement = document.getElementsByClassName('wordCanvas')
+        TweenMax.staggerFrom(animElement, 0.2, {
+          opacity: 0,
+          scale: 0
+        })
+        TweenMax.staggerTo(animElement, 0.2, {
+          opacity: 1,
+          scale: 1
+        })
+      }
+      this.word.Draw()
+    } else {
+      this.penalty += 2
+      this.consecLetters = 0
+      let currentBg = document.body.style.backgroundColor
+      console.log(currentBg)
+      let animElement = document.getElementsByClassName('wordCanvas')
+      TweenMax.staggerFrom(animElement, 0.3, {
+        backgroundColor: 'red'
+      })
+      TweenMax.staggerTo(animElement, 0.3, {
+        backgroundColor: currentBg
+      })
+      console.log('Wrong letter pressed')
     }
+    this.score = this.guessedLetters + this.bonusPoints + this.guessedWords * 10 - this.penalty
+    document.getElementById('score').innerHTML = "SCORE: " + this.score
+  }
 
 }
 
@@ -155,8 +155,8 @@ Word.prototype = {
     this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height)
 
     this.ctx.textAlign = 'center'
-    this.ctx.font = typer.size +" "+ typer.font
-    
+    this.ctx.font = typer.size + " " + typer.font
+
     this.ctx.fillText(this.left, this.canvas.width / 2, this.canvas.height / 2)
 
     /* drawing the counter
@@ -172,7 +172,7 @@ Word.prototype = {
 }
 
 /* HELPERS */
-function structureArrayByWordLength (words) {
+function structureArrayByWordLength(words) {
   let tempArray = []
 
   for (let i = 0; i < words.length; i++) {
@@ -223,16 +223,16 @@ function nightMode() {
 
 
 function FontChange() {
-  document.getElementById("customButton").addEventListener("click", function(){
-    typer.font=document.getElementById("FontChange").value
-    typer.size=document.getElementById("SizeChange").value
+  document.getElementById("customButton").addEventListener("click", function () {
+    typer.font = document.getElementById("FontChange").value
+    typer.size = document.getElementById("SizeChange").value
   })
 
 
   console.log()
 }
 
-function timerPlayer(){
+function timerPlayer() {
   document.getElementById("playerSubmit").addEventListener("click", function () {
     document.getElementById('score').innerHTML = "SCORE: "
     playerName = document.getElementById("playerName").value
@@ -242,27 +242,27 @@ function timerPlayer(){
   })
 }
 
-function gameStart(){
-  window.addEventListener('hashchange', function(){
-    if(window.location.hash === '#game'){
+function gameStart() {
+  window.addEventListener('hashchange', function () {
+    if (window.location.hash === '#game') {
       const typer = new TYPER()
       window.typer = typer
-      i = setInterval(function() {
-        if(counter != 0 && playerName != ""){
+      i = setInterval(function () {
+        if (counter != 0 && playerName != "") {
           counter -= 1
-        }else if(counter == 0){
+        } else if (counter == 0) {
           gameEnd()
         }
         document.getElementById('timer').innerHTML = "Time remaining: " + counter
-        },1000)
-    }else{
+      }, 1000)
+    } else {
       document.getElementById('timer').innerHTML = "Return to game!"
       clearInterval(i)
     }
   })
 }
 
-function gameEnd(){
+function gameEnd() {
   alert("Game over!\nYou scored " + typer.score + " points")
   window.location.hash = 'stats'
   saveLocal()
@@ -276,13 +276,13 @@ function gameEnd(){
   typer.score = 0
   counter = 60
   document.getElementById('score').innerHTML = "SCORE: "
-  typer.canvas.getContext('2d').clearRect(0,0,typer.canvas.width, typer.canvas.height)
+  typer.canvas.getContext('2d').clearRect(0, 0, typer.canvas.width, typer.canvas.height)
 }
 
-function saveLocal () { 
+function saveLocal() {
   let d = new Date()
   let score = typer.score.toString()
-  let scoreLabel = "game_"+d.getTime().toString()
+  let scoreLabel = "game_" + d.getTime().toString()
   let o = {
     player: playerName,
     score: score
@@ -290,38 +290,39 @@ function saveLocal () {
   localStorage.setItem(scoreLabel, JSON.stringify(o))
 }
 
-/*function loadLocal(){
+/*
+function loadLocal(){
   localValue = localStorage.getItem('textInput')
   JSON.parse(localValue).text
-}*/
+}
+*/
 
 window.onload = function () {
   timerPlayer()
   FontChange()
 }
 
-function showScores () {
-
+function showScores() {
   var table = document.getElementById('scoreTable')
 
-    for(var i =0; i < localStorage.length; i++){
-    
+  for (var i = 0; i < localStorage.length; i++) {
+
     var myObj = JSON.parse(localStorage.getItem(localStorage.key(i)));
 
-    var playerName = myObj["player"];
-    var playerScore = myObj["score"];
-    var row = table.insertRow(0);
-    var cell1 = row.insertCell(0);
-    var cell2 = row.insertCell(1);
+    var playerName = myObj['player']
+    var playerScore = myObj['score']
+    var row = table.insertRow(0)
+    var cell1 = row.insertCell(0)
+    var cell2 = row.insertCell(1)
     cell1.innerHTML = playerName
     cell2.innerHTML = playerScore
   }
 
-  var row = table.insertRow(0);
-  var headerCell = document.createElement("TH");
-  var headerCell2 = document.createElement("TH");
-  headerCell.innerHTML = "Player Name"
-  headerCell2.innerHTML = "Player Score"
+  var row = table.insertRow(0)
+  var headerCell = document.createElement('TH')
+  var headerCell2 = document.createElement('TH')
+  headerCell.innerHTML = 'Player Name'
+  headerCell2.innerHTML = 'Player Score'
   row.appendChild(headerCell);
   row.appendChild(headerCell2);
 }
