@@ -308,25 +308,31 @@ function showScores() {
   while (table.firstChild) {
     table.removeChild(table.firstChild)
   }
-  // Add newest scores to table
+
+  let tempArray = []
+  // Loop localstorage and get all players and their scores
   for (var i = 0; i < localStorage.length; i++) {
-
-    var myObj = JSON.parse(localStorage.getItem(localStorage.key(i)));
-
-    var playerName = myObj['player']
-    var playerScore = myObj['score']
-    var row = table.insertRow(0)
-    var cell1 = row.insertCell(0)
-    var cell2 = row.insertCell(1)
-    cell1.innerHTML = playerName
-    cell2.innerHTML = playerScore
+    let myObj = JSON.parse(localStorage.getItem(localStorage.key(i)))
+    let playerName = myObj['player']
+    let playerScore = parseInt(myObj['score'])
+    let scoreInfo = {player: playerName, score: playerScore}
+    tempArray.push(scoreInfo)
   }
-
-  var row = table.insertRow(0)
-  var headerCell = document.createElement('TH')
-  var headerCell2 = document.createElement('TH')
+  // Get 10 maximum values from scores array
+  let sortedArray = tempArray.sort(function (a, b) { return b.score - a.score })
+  for (var i = 0; i < 10; i++) {
+    let row = table.insertRow(0)
+    let cell1 = row.insertCell(0)
+    let cell2 = row.insertCell(1)
+    cell1.innerHTML = sortedArray[i].player
+    cell2.innerHTML = sortedArray[i].score
+  }
+  // Create table headers
+  let row = table.insertRow(0)
+  let headerCell = document.createElement('TH')
+  let headerCell2 = document.createElement('TH')
   headerCell.innerHTML = 'Player Name'
   headerCell2.innerHTML = 'Player Score'
-  row.appendChild(headerCell);
-  row.appendChild(headerCell2);
+  row.appendChild(headerCell)
+  row.appendChild(headerCell2)
 }
