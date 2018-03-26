@@ -5,7 +5,7 @@ let counter = 60
 const TYPER = function () {
   if (TYPER.instance_) {
     return TYPER.instance_
-  }
+  } 
   TYPER.instance_ = this
 
   this.WIDTH = window.innerWidth
@@ -22,9 +22,10 @@ const TYPER = function () {
   this.bonusPoints = 0
   this.consecLetters = 0
   this.penalty = 0
-
+  
  
-
+  this.size ='140px'
+  this.font = 'Courier'
   this.canvas = document.getElementsByTagName('canvas')[0]
   this.ctx = this.canvas.getContext('2d')
 
@@ -153,7 +154,8 @@ Word.prototype = {
     this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height)
 
     this.ctx.textAlign = 'center'
-    this.ctx.font = '140px Courier'
+    this.ctx.font = typer.size +" "+ typer.font
+    
     this.ctx.fillText(this.left, this.canvas.width / 2, this.canvas.height / 2)
 
     /* drawing the counter
@@ -217,6 +219,17 @@ function nightMode() {
   }
 }
 
+
+function FontChange() {
+  document.getElementById("customButton").addEventListener("click", function(){
+    typer.font=document.getElementById("FontChange").value
+    typer.size=document.getElementById("SizeChange").value
+  })
+
+
+  console.log()
+}
+
 function timerPlayer(){
   document.getElementById("playerSubmit").addEventListener("click", function () {
     playerName = document.getElementById("playerName").value
@@ -235,4 +248,5 @@ window.onload = function () {
   const typer = new TYPER()
   window.typer = typer
   timerPlayer()
+  FontChange()
 }

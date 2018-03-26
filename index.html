@@ -9,6 +9,9 @@
 	<script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
 	 crossorigin="anonymous">
 	</script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+	crossorigin="anonymous">
+	</script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
 	 crossorigin="anonymous">
 	</script>
@@ -17,7 +20,7 @@
 	<link rel="stylesheet" type="text/css" href="style.css">
 	<script src="app.js"></script>
 	<!-- <script src="test.js"></script> -->
-</head>
+</head> 
 
 <body>
 	<nav class="navbar navbar-expand-sm bg-dark navbar-dark fixed-top">
@@ -75,8 +78,32 @@
 						<span class="slider round"></span>
 				</label>
 				<hr>
-				<p>Font and size?</p>
-				<p>...</p>
+				<h5>Font </h5>
+				<div class="form-group col-md-2">
+					<label for="FontChange">Select font:</label>
+					<select class="form-control " id="FontChange">
+						<option>Courier</option>
+						<option>Arial</option>
+						<option>Times New Roman</option>	
+					</select>
+				  </div>
+				  
+				<hr>
+
+				<h5>Size </h5>
+				<div class="form-group col-md-1">
+					<label for="SizeChange">Select size:</label>
+					<select class="form-control" id="SizeChange">
+					  <option>140px</option>
+					  <option>150px</option>
+					  <option>200px</option>
+					  <option>250px</option>
+					</select>
+				  </div>
+				  <div class="btn">
+					<button type="button" id="customButton" class="btn">Submit</button>
+				  </div>
+				
 			</section>
 
 			<!-- Stats -->
