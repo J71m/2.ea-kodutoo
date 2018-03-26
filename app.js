@@ -229,6 +229,9 @@ function timerPlayer () {
   document.getElementById('playerSubmit').addEventListener('click', function () {
     document.getElementById('score').innerHTML = 'SCORE: '
     playerName = document.getElementById('playerName').value
+    if (playerName === '') {
+      playerName = 'DefaultPlayer'
+    }
     document.getElementById('replaceName').innerHTML = playerName
     window.location.hash = 'game'
     gameStart()
