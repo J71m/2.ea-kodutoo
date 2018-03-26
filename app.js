@@ -1,6 +1,6 @@
 /* TYPER */
-/* global TweenMax */
-let playerName = ""
+/* global TweenMax typer */
+let playerName = ''
 let counter = 60
 const TYPER = function () {
   if (TYPER.instance_) {
@@ -23,7 +23,6 @@ const TYPER = function () {
   this.consecLetters = 0
   this.penalty = 0
 
-
   this.size = '140px'
   this.font = 'Courier'
   this.canvas = document.getElementsByTagName('canvas')[0]
@@ -33,9 +32,6 @@ const TYPER = function () {
 }
 
 window.TYPER = TYPER
-
-
-
 
 TYPER.prototype = {
   init: function () {
@@ -47,7 +43,6 @@ TYPER.prototype = {
 
     this.canvas.width = this.WIDTH * 2
     this.canvas.height = this.HEIGHT * 2
-
 
     this.loadWords()
   },
@@ -138,7 +133,7 @@ TYPER.prototype = {
       console.log('Wrong letter pressed')
     }
     this.score = this.guessedLetters + this.bonusPoints + this.guessedWords * 10 - this.penalty
-    document.getElementById('score').innerHTML = "SCORE: " + this.score
+    document.getElementById('score').innerHTML = 'SCORE: ' + this.score
   }
 
 }
@@ -156,7 +151,7 @@ Word.prototype = {
     this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height)
 
     this.ctx.textAlign = 'center'
-    this.ctx.font = typer.size + " " + typer.font
+    this.ctx.font = typer.size + ' ' + typer.font
 
     this.ctx.fillText(this.left, this.canvas.width / 2, this.canvas.height / 2)
 
@@ -173,7 +168,7 @@ Word.prototype = {
 }
 
 /* HELPERS */
-function structureArrayByWordLength(words) {
+function structureArrayByWordLength (words) {
   let tempArray = []
 
   for (let i = 0; i < words.length; i++) {
@@ -211,7 +206,7 @@ function timer () {
 }
 */
 
-function nightMode() {
+function nightMode () {
   if (document.querySelector('#nightMode').checked) {
     document.body.style.background = 'SlateGray'
     console.log('night on')
@@ -221,15 +216,12 @@ function nightMode() {
   }
 }
 
-
-
 function FontChange() {
   //change font and size of words
   document.getElementById("customButton").addEventListener("click", function () {
     typer.font = document.getElementById("FontChange").value
     typer.size = document.getElementById("SizeChange").value
   })
-
 
   console.log()
 }
@@ -252,22 +244,22 @@ function gameStart() {
       const typer = new TYPER()
       window.typer = typer
       i = setInterval(function () {
-        if (counter != 0 && playerName != "") {
+        if (counter != 0 && playerName != '') {
           counter -= 1
         } else if (counter == 0) {
           gameEnd()
         }
-        document.getElementById('timer').innerHTML = "Time remaining: " + counter
+        document.getElementById('timer').innerHTML = 'Time remaining: ' + counter
       }, 1000)
     } else {
-      document.getElementById('timer').innerHTML = "Return to game!"
+      document.getElementById('timer').innerHTML = 'Return to game!'
       clearInterval(i)
     }
   })
 }
 
-function gameEnd() {
-  alert("Game over!\nYou scored " + typer.score + " points")
+function gameEnd () {
+  alert('Game over!\nYou scored ' + typer.score + ' points')
   window.location.hash = 'stats'
   saveLocal()
   // reset all variables for new game
@@ -279,14 +271,14 @@ function gameEnd() {
   typer.penalty = 0
   typer.score = 0
   counter = 60
-  document.getElementById('score').innerHTML = "SCORE: "
+  document.getElementById('score').innerHTML = 'SCORE: '
   typer.canvas.getContext('2d').clearRect(0, 0, typer.canvas.width, typer.canvas.height)
 }
 
-function saveLocal() {
+function saveLocal () {
   let d = new Date()
   let score = typer.score.toString()
-  let scoreLabel = "game_" + d.getTime().toString()
+  let scoreLabel = 'game_' + d.getTime().toString()
   let o = {
     player: playerName,
     score: score
@@ -306,7 +298,7 @@ window.onload = function () {
   FontChange()
 }
 
-function showScores() {
+function showScores () {
   var table = document.getElementById('scoreTable')
   // Remove all current children of table
   while (table.firstChild) {
@@ -319,7 +311,7 @@ function showScores() {
     let myObj = JSON.parse(localStorage.getItem(localStorage.key(i)))
     let playerName = myObj['player']
     let playerScore = parseInt(myObj['score'])
-    let scoreInfo = {player: playerName, score: playerScore}
+    let scoreInfo = { player: playerName, score: playerScore }
     tempArray.push(scoreInfo)
   }
   // Get 10 maximum values from scores array
