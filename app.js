@@ -279,15 +279,21 @@ function gameEnd(){
   typer.canvas.getContext('2d').clearRect(0,0,typer.canvas.width, typer.canvas.height)
 }
 
-function saveLocal () {
+function saveLocal () { 
   let d = new Date()
+  let score = typer.score.toString()
   let scoreLabel = "game_"+d.getTime().toString()
   let o = {
-    player: playerName
-    score: typer.score.toString()
+    player: playerName,
+    score: score
   }
   localStorage.setItem(scoreLabel, JSON.stringify(o))
 }
+
+/*function loadLocal(){
+  localValue = localStorage.getItem('textInput')
+  JSON.parse(localValue).text
+}*/
 
 window.onload = function () {
   timerPlayer()
