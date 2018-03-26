@@ -137,7 +137,7 @@ TYPER.prototype = {
       console.log('Wrong letter pressed')
     }
     this.score = this.guessedLetters + this.bonusPoints + this.guessedWords * 10 - this.penalty
-    document.getElementById('score').innerHTML = this.score
+    document.getElementById('score').innerHTML ="SCORE: " + this.score
   }
 }
 
@@ -218,6 +218,7 @@ function nightMode() {
     console.log('night off')
   }
 }
+
 
 
 function FontChange() {
