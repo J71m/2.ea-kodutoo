@@ -6,7 +6,10 @@ Mängu eesmärk on võimalikult kiiresti ekraanile tekkivaid sõnu ära trükkid
 ### Autorid:
 Tim</br>
 Jaroslava Koger</br>
-Rasmus
+Rasmus</br>
+
+Skeem:
+![alt text](https://i.imgur.com/mkQAnZF.jpg)
 
 
 
