@@ -299,3 +299,20 @@ window.onload = function () {
   timerPlayer()
   FontChange()
 }
+
+function showScores () {
+    for(var i =0; i < localStorage.length; i++){
+    
+    var myObj = JSON.parse(localStorage.getItem(localStorage.key(i)));
+
+    var playerName = myObj["player"];
+    var playerScore = myObj["score"];
+
+    var table = document.getElementById('scoreTable')
+    var row = table.insertRow(0);
+    var cell1 = row.insertCell(0);
+    var cell2 = row.insertCell(1);
+    cell1.innerHTML = playerName
+    cell2.innerHTML = playerScore
+  }
+}

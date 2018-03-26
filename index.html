@@ -35,7 +35,7 @@
 					<a class="nav-link" href="#options">Options</a>
 				</li>
 				<li class="nav-item">
-					<a class="nav-link" href="#stats">Stats</a>
+					<a class="nav-link" href="#stats" onClick="showScores()">Stats</a>
 				</li>
 				<li class="nav-item ">
 						<a class="nav-link" href="#welcome">Game description</a>
@@ -111,7 +111,14 @@
 			<section id="stats" style="padding-top:60px;">
 				<h2>Statistics</h2>
         <p>top10 scores from localstorage</p>
-        <div id="leaderboard"></div>
+		<div id="leaderboard"></div>
+		<div class="table-responsive">
+
+		<table class="table" id="scoreTable">
+				<th>Player Name</th>
+				<th>Score</th>
+		</table>
+	</div>
 			</section>
 
 			<!-- Player select, default last player -->
