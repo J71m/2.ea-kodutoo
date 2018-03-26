@@ -7,7 +7,7 @@ const TYPER = function () {
     return TYPER.instance_
   } 
   TYPER.instance_ = this
-
+ 
   this.WIDTH = window.innerWidth
   this.HEIGHT = window.innerHeight
   this.canvas = null
