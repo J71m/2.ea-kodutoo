@@ -234,7 +234,7 @@ function FontChange() {
 
 function timerPlayer(){
   document.getElementById("playerSubmit").addEventListener("click", function () {
-    
+    document.getElementById('score').innerHTML = "SCORE: "
     playerName = document.getElementById("playerName").value
     document.getElementById("replaceName").innerHTML = playerName
     window.location.hash = 'game'
@@ -265,7 +265,7 @@ function gameStart(){
 function gameEnd(){
   alert("Game over!\nYou scored " + typer.score + " points")
   window.location.hash = 'stats'
-
+  saveLocal()
   // reset all variables for new game
   typer.wordMinLength = 5
   typer.guessedWords = 0
@@ -275,7 +275,18 @@ function gameEnd(){
   typer.penalty = 0
   typer.score = 0
   counter = 60
+  document.getElementById('score').innerHTML = "SCORE: "
+  typer.canvas.getContext('2d').clearRect(0,0,typer.canvas.width, typer.canvas.height)
+}
 
+function saveLocal () {
+  let d = new Date()
+  let scoreLabel = "game_"+d.getTime().toString()
+  let o = {
+    player: playerName
+    score: typer.score.toString()
+  }
+  localStorage.setItem(scoreLabel, JSON.stringify(o))
 }
 
 window.onload = function () {
