@@ -62,3 +62,4 @@ typings/
 
 .vscode
 node_modules
+sftp.json

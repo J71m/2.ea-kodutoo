@@ -86,7 +86,7 @@ TYPER.prototype = {
   },
 
   keyPressed: function (event) {
-    //keypress events and score calculations
+    // keypress events and score calculations
     const letter = String.fromCharCode(event.which)
     if (letter === this.word.left.charAt(0)) {
       this.guessedLetters += 1
@@ -216,37 +216,36 @@ function nightMode () {
   }
 }
 
-function FontChange() {
-  //change font and size of words
-  document.getElementById("customButton").addEventListener("click", function () {
-    typer.font = document.getElementById("FontChange").value
-    typer.size = document.getElementById("SizeChange").value
+function FontChange () {
+  // change font and size of words
+  document.getElementById('customButton').addEventListener('click', function () {
+    typer.font = document.getElementById('FontChange').value
+    typer.size = document.getElementById('SizeChange').value
   })
-
-  console.log()
 }
 
-function timerPlayer() {
-  //setup for starting game
-  document.getElementById("playerSubmit").addEventListener("click", function () {
-    document.getElementById('score').innerHTML = "SCORE: "
-    playerName = document.getElementById("playerName").value
-    document.getElementById("replaceName").innerHTML = playerName
+function timerPlayer () {
+  // setup for starting game
+  document.getElementById('playerSubmit').addEventListener('click', function () {
+    document.getElementById('score').innerHTML = 'SCORE: '
+    playerName = document.getElementById('playerName').value
+    document.getElementById('replaceName').innerHTML = playerName
     window.location.hash = 'game'
     gameStart()
   })
 }
 
-function gameStart() {
-  //checks user location on the webpage and pauses/resumes counter accordingly
+function gameStart () {
+  let i
+  // checks user location on the webpage and pauses/resumes counter accordingly
   window.addEventListener('hashchange', function () {
     if (window.location.hash === '#game') {
       const typer = new TYPER()
       window.typer = typer
       i = setInterval(function () {
-        if (counter != 0 && playerName != '') {
+        if (counter !== 0 && playerName !== '') {
           counter -= 1
-        } else if (counter == 0) {
+        } else if (counter === 0) {
           gameEnd()
         }
         document.getElementById('timer').innerHTML = 'Time remaining: ' + counter
@@ -259,9 +258,11 @@ function gameStart() {
 }
 
 function gameEnd () {
-  alert('Game over!\nYou scored ' + typer.score + ' points')
-  window.location.hash = 'stats'
   saveLocal()
+  alert('Game over!\nYou scored ' + typer.score + ' points')
+  // näitab kõige uuemat tulemust tabelis
+  showScores()
+  window.location.hash = 'stats'
   // reset all variables for new game
   typer.wordMinLength = 5
   typer.guessedWords = 0
@@ -286,19 +287,13 @@ function saveLocal () {
   localStorage.setItem(scoreLabel, JSON.stringify(o))
 }
 
-/*
-function loadLocal(){
-  localValue = localStorage.getItem('textInput')
-  JSON.parse(localValue).text
-}
-*/
-
 window.onload = function () {
   timerPlayer()
   FontChange()
 }
 
 function showScores () {
+  console.log('updating scores')
   var table = document.getElementById('scoreTable')
   // Remove all current children of table
   while (table.firstChild) {
@@ -317,7 +312,7 @@ function showScores () {
   // Get 10 maximum values from scores array
   let sortedArray = tempArray.sort(function (a, b) { return b.score - a.score })
   let arrayLen = sortedArray.length
-  for (var i = 0; i < 10 && i < arrayLen; i++) {
+  for (let i = 9; i > -1 && i < arrayLen; i--) {
     let row = table.insertRow(0)
     let cell1 = row.insertCell(0)
     let cell2 = row.insertCell(1)
