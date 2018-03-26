@@ -1,6 +1,6 @@
 /* TYPER */
 /* global TweenMax */
-let playerName = "a"
+let playerName = ""
 let counter = 60
 const TYPER = function () {
   if (TYPER.instance_) {
@@ -217,14 +217,11 @@ function nightMode() {
   }
 }
 
-
-window.onload = function () {
-  const typer = new TYPER()
-  window.typer = typer
+function timerPlayer(){
   document.getElementById("playerSubmit").addEventListener("click", function () {
     playerName = document.getElementById("playerName").value
     document.getElementById("replaceName").innerHTML = playerName
-    window.location.replace('http://greeny.cs.tlu.ee/~jaantim/js/2.ea-kodutoo/#game');
+    window.location.hash = 'game'
     setInterval(function() {
     if(counter != 0 && playerName != ""){
       counter -= 1
@@ -232,4 +229,10 @@ window.onload = function () {
     document.getElementById('timer').innerHTML = "Time remaining: " + counter
     },1000)
   })
+}
+
+window.onload = function () {
+  const typer = new TYPER()
+  window.typer = typer
+  timerPlayer()
 }
