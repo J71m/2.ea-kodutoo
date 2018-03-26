@@ -91,54 +91,55 @@ TYPER.prototype = {
   },
 
   keyPressed: function (event) {
-    const letter = String.fromCharCode(event.which)
-    if (letter === this.word.left.charAt(0)) {
-      this.guessedLetters += 1
-      this.consecLetters += 1
-      if (this.consecLetters === 10) {
-        this.consecLetters = 0
-        this.bonusPoints += 10
-      }
-      let animElement = document.getElementsByClassName('wordCanvas')
-      TweenMax.staggerFrom(animElement, 0.3, {
-        scale: 0.8
-      })
-      TweenMax.staggerTo(animElement, 0.3, {
-        scale: 1.0
-      })
-      this.word.removeFirstLetter()
-
-      if (this.word.left.length === 0) {
-        this.guessedWords += 1
-        this.generateWord()
+      const letter = String.fromCharCode(event.which)
+      if (letter === this.word.left.charAt(0)) {
+        this.guessedLetters += 1
+        this.consecLetters += 1
+        if (this.consecLetters === 10) {
+          this.consecLetters = 0
+          this.bonusPoints += 10
+        }
         let animElement = document.getElementsByClassName('wordCanvas')
-        TweenMax.staggerFrom(animElement, 0.2, {
-          opacity: 0,
-          scale: 0
+        TweenMax.staggerFrom(animElement, 0.3, {
+          scale: 0.8
         })
-        TweenMax.staggerTo(animElement, 0.2, {
-          opacity: 1,
-          scale: 1
+        TweenMax.staggerTo(animElement, 0.3, {
+          scale: 1.0
         })
+        this.word.removeFirstLetter()
+
+        if (this.word.left.length === 0) {
+          this.guessedWords += 1
+          this.generateWord()
+          let animElement = document.getElementsByClassName('wordCanvas')
+          TweenMax.staggerFrom(animElement, 0.2, {
+            opacity: 0,
+            scale: 0
+          })
+          TweenMax.staggerTo(animElement, 0.2, {
+            opacity: 1,
+            scale: 1
+          })
+        }
+        this.word.Draw()
+      } else {
+        this.penalty += 2
+        this.consecLetters = 0
+        let currentBg = document.body.style.backgroundColor
+        console.log(currentBg)
+        let animElement = document.getElementsByClassName('wordCanvas')
+        TweenMax.staggerFrom(animElement, 0.3, {
+          backgroundColor: 'red'
+        })
+        TweenMax.staggerTo(animElement, 0.3, {
+          backgroundColor: currentBg
+        })
+        console.log('Wrong letter pressed')
       }
-      this.word.Draw()
-    } else {
-      this.penalty += 2
-      this.consecLetters = 0
-      let currentBg = document.body.style.backgroundColor
-      console.log(currentBg)
-      let animElement = document.getElementsByClassName('wordCanvas')
-      TweenMax.staggerFrom(animElement, 0.3, {
-        backgroundColor: 'red'
-      })
-      TweenMax.staggerTo(animElement, 0.3, {
-        backgroundColor: currentBg
-      })
-      console.log('Wrong letter pressed')
+      this.score = this.guessedLetters + this.bonusPoints + this.guessedWords * 10 - this.penalty
+      document.getElementById('score').innerHTML ="SCORE: " + this.score
     }
-    this.score = this.guessedLetters + this.bonusPoints + this.guessedWords * 10 - this.penalty
-    document.getElementById('score').innerHTML ="SCORE: " + this.score
-  }
+
 }
 
 /* WORD */
@@ -233,21 +234,51 @@ function FontChange() {
 
 function timerPlayer(){
   document.getElementById("playerSubmit").addEventListener("click", function () {
+    
     playerName = document.getElementById("playerName").value
     document.getElementById("replaceName").innerHTML = playerName
     window.location.hash = 'game'
-    setInterval(function() {
-    if(counter != 0 && playerName != ""){
-      counter -= 1
-    }
-    document.getElementById('timer').innerHTML = "Time remaining: " + counter
-    },1000)
+    gameStart()
   })
 }
 
+function gameStart(){
+  window.addEventListener('hashchange', function(){
+    if(window.location.hash === '#game'){
+      const typer = new TYPER()
+      window.typer = typer
+      i = setInterval(function() {
+        if(counter != 0 && playerName != ""){
+          counter -= 1
+        }else if(counter == 0){
+          gameEnd()
+        }
+        document.getElementById('timer').innerHTML = "Time remaining: " + counter
+        },1000)
+    }else{
+      document.getElementById('timer').innerHTML = "Return to game!"
+      clearInterval(i)
+    }
+  })
+}
+
+function gameEnd(){
+  alert("Game over!\nYou scored " + typer.score + " points")
+  window.location.hash = 'stats'
+
+  // reset all variables for new game
+  typer.wordMinLength = 5
+  typer.guessedWords = 0
+  typer.guessedLetters = 0
+  typer.bonusPoints = 0
+  typer.consecLetters = 0
+  typer.penalty = 0
+  typer.score = 0
+  counter = 60
+
+}
+
 window.onload = function () {
-  const typer = new TYPER()
-  window.typer = typer
   timerPlayer()
   FontChange()
 }
