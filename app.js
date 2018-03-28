@@ -315,7 +315,7 @@ function showScores () {
   // Get 10 maximum values from scores array
   let sortedArray = tempArray.sort(function (a, b) { return b.score - a.score })
   let arrayLen = sortedArray.length
-  for (let i = 9; i > -1 && i < arrayLen; i--) {
+  for (let i = 0; i < 10 && i < arrayLen; i++) {
     let row = table.insertRow(0)
     let cell1 = row.insertCell(0)
     let cell2 = row.insertCell(1)
